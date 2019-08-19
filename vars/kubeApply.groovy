@@ -37,7 +37,7 @@ def configureYaml(config, yamlFile){
     echo ${cfg} > /tmp/configfile.tmp
     sed -i 's#, #\\n#g' /tmp/configfile.tmp
     sed -i 's#[][]##g' /tmp/configfile.tmp
-    sed "s/^/s#</" /tmp/configfile.tmp | sed "s/:/>#'/" | sed "s/\$/'#g/" > /tmp/sedtmpl.sed
+    sed "s/^/s#</" /tmp/configfile.tmp | sed "s/:/>#/" | sed "s/\$/#g/" > /tmp/sedtmpl.sed
     name=\$(cat /tmp/sedtmpl.sed | grep DEPLOYMENT_NAME | tr -d \\')
     sed -i "/DEPLOYMENT_NAME/c\\\\\$name" /tmp/sedtmpl.sed
     sed -f /tmp/sedtmpl.sed -i ${yamlFile}
