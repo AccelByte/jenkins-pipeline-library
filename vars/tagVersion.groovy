@@ -39,13 +39,7 @@ def isTagged(String version) {
 }
 
 def isMasterOrRelease() {
-  def branch = sh (
-    returnStdout: true,
-    script: """
-      git branch | awk '/\\*/ { print \$2 }'
-    """
-  ).trim()
-  if (branch == "master" || branch.contains("release/")) return true
+  if (BRANCH_NAME == "master" || BRANCH_NAME.startsWith("release/")) return true
   return false
 }
 
