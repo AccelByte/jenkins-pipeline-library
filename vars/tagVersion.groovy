@@ -9,7 +9,7 @@ def call(version, sshCreds){
   )
   repoName = repoName.trim()
   sh "git config --global core.sshCommand 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'"
-  if (!isSnapshot(version) && !isTagged(version) && isMaster()) {
+  if (!isSnapshot(version) && !isTagged(version) && isMasterOrRelease()) {
     sshagent([sshCreds]){
       sh """
         git status
@@ -38,14 +38,14 @@ def isTagged(String version) {
   return false
 }
 
-def isMaster() {
+def isMasterOrRelease() {
   def branch = sh (
     returnStdout: true,
     script: """
-      git name-rev `git rev-parse --verify HEAD`
+      git branch | awk '/\\*/ { print \$2 }'
     """
-  )
-  if (branch.contains("master")) return true
+  ).trim()
+  if (branch == "master" || branch.contains("release/")) return true
   return false
 }
 
