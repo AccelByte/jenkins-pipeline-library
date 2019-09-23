@@ -24,7 +24,6 @@ withAWS(
         configureYaml(deploymentConfig, it)
         sh """
           kubectl apply -f ${it} -n ${deployTarget}
-          kubectl replace -f ${it} -n ${deployTarget} --force
         """
       }
     }
