@@ -60,7 +60,7 @@ def getLinkJiraTicket(){
     def repoName = sh (
 	returnStdout: true,
 	script: """
-	  export repoName=`basename `git rev-parse --show-toplevel`
+	  export repoName=`basename git rev-parse --show-toplevel`
 	"""
     )
     def linkJira = sh (
