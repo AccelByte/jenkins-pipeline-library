@@ -51,22 +51,12 @@ def buildUser(){
 }
 
 def getLinkJiraTicket(){
-    def commitId = sh (
-        returnStdout: true,
-        script: """
-          export commitId=`git rev-parse --short HEAD`
-        """
-    )
-    def repoName = sh (
-	returnStdout: true,
-	script: """
-	  export repoName=`basename `git rev-parse --show-toplevel`
-	"""
-    )
     def linkJira = sh (
         returnStdout: true,
         script: """
-          curl -s --user ${USERNAME}:${PASSWORD} https://api.bitbucket.org/2.0/repositories/accelbyte/${repoName}/commit/${commitId}?q=summary | jq -r ".rendered.message.html" |  tr ' ' '\n' | grep href= | grep accelbyte.atlassian.net/browse | awk -F'href=' '{print \$2}' | sort -u | sed 's/"//g'
+          export repoName=\$(basename \$(git remote get-url origin) | sed -e "s/.git\$//")
+          export commitId=`git rev-parse --short HEAD`
+          curl -s --user ${USERNAME}:${PASSWORD} https://api.bitbucket.org/2.0/repositories/accelbyte/\${repoName}/commit/\${commitId}?q=summary | jq -r ".rendered.message.html" |  tr ' ' '\n' | grep href= | grep accelbyte.atlassian.net/browse | awk -F'href=' '{print \$2}' | sort -u | sed 's/"//g'
         """
     )
     return linkJira
