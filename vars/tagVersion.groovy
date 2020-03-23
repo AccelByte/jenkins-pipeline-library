@@ -16,7 +16,7 @@ def call(version, sshCreds){
         git config --global user.email "build@accelbyte.net"
         git config --global user.name "Jenkins Build"
         git tag -a ${version} `git log --pretty=format:'%h' -n 1` -m "Tagged by Jenkins"
-        git push origin ${version}
+        git push origin ${version} || true
       """
     }
   } else if (!isSnapshot(version) && isTagged(version)) {
