@@ -56,7 +56,7 @@ metadata:
 spec:
   containers:
     - name: kubectl
-      image: accelbyte/kubectl:v1.17.0
+      image: accelbyte/kubectl:v1.17.1
       imagePullPolicy: IfNotPresent
       securityContext:
         privileged: true
