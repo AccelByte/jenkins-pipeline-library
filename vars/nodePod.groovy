@@ -102,6 +102,8 @@ spec:
           mountPath: "/var/run/docker.sock"
         - name: workspace
           mountPath: "/home/jenkins/workspace/${env.JOB_NAME}"
+        - name: tmp
+          mountPath: "/tmp"
     - name: builder
       image: accelbyte/golang-builder:1.12-alpine3.9
       imagePullPolicy: IfNotPresent
@@ -110,6 +112,8 @@ spec:
           mountPath: "/var/run/docker.sock"
         - name: workspace
           mountPath: "/home/jenkins/workspace/${env.JOB_NAME}"
+        - name: tmp
+          mountPath: "/tmp"
       securityContext:
         privileged: true
         runAsUser: 0
@@ -125,6 +129,9 @@ spec:
           cpu: 2000m
           memory: 4Gi
   volumes:
+  - name: tmp
+    hostPath:
+      path: /tmp
   - name: dockersock
     hostPath:
       path: /var/run/docker.sock
