@@ -14,7 +14,7 @@ def call(Map args = [:], Closure body) {
     case "builder":
       podTemplate(name: podLabel,
         label: podLabel,
-        namespace: "default",
+        namespace: "build",
         annotations: [
           podAnnotation(key: "traffic.sidecar.istio.io/excludeOutboundPorts", value: excludeOutboundPorts)
         ],
@@ -42,7 +42,7 @@ spec:
           cpu: 2000m
           memory: 4Gi
   nodeSelector:
-    kops.k8s.io/instancegroup: nodes
+    kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
       break
 
@@ -50,7 +50,7 @@ spec:
     case "kubectl":
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "default",
+      namespace: "build",
       annotations: [
         podAnnotation(key: "traffic.sidecar.istio.io/excludeOutboundPorts", value: excludeOutboundPorts)
       ],
@@ -76,7 +76,7 @@ spec:
         requests:
           cpu: 200m
   nodeSelector:
-    kops.k8s.io/instancegroup: nodes
+    kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
       break
 
@@ -84,7 +84,7 @@ spec:
     case "superbuilder":
       podTemplate(name: podLabel,
         label: podLabel,
-        namespace: "default",
+        namespace: "build",
         annotations: [
           podAnnotation(key: "traffic.sidecar.istio.io/excludeOutboundPorts", value: excludeOutboundPorts)
         ],
@@ -143,7 +143,7 @@ spec:
       path: /home/jenkins/agent/workspace/${env.JOB_NAME}
       mode: 777
   nodeSelector:
-    kops.k8s.io/instancegroup: nodes
+    kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
       break
 
@@ -151,7 +151,7 @@ spec:
     case "debian":
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "default",
+      namespace: "build",
       annotations: [
         podAnnotation(key: "traffic.sidecar.istio.io/excludeOutboundPorts", value: excludeOutboundPorts)
       ],
@@ -177,7 +177,7 @@ spec:
         requests:
           cpu: 500m
   nodeSelector:
-    kops.k8s.io/instancegroup: nodes
+    kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
       break
 
@@ -186,7 +186,7 @@ spec:
     default:
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "default",
+      namespace: "build",
       annotations: [
         podAnnotation(key: "traffic.sidecar.istio.io/excludeOutboundPorts", value: excludeOutboundPorts)
       ],
@@ -212,7 +212,7 @@ spec:
         requests:
           cpu: 500m
   nodeSelector:
-    kops.k8s.io/instancegroup: nodes
+    kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
       break
   }
