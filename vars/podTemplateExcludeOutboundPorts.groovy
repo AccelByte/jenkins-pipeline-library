@@ -14,7 +14,7 @@ def call(Map args = [:], Closure body) {
     case "builder":
       podTemplate(name: podLabel,
         label: podLabel,
-        namespace: "build",
+        namespace: "jenkins",
         annotations: [
           podAnnotation(key: "traffic.sidecar.istio.io/excludeOutboundPorts", value: excludeOutboundPorts)
         ],
@@ -50,7 +50,7 @@ spec:
     case "kubectl":
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "build",
+      namespace: "jenkins",
       annotations: [
         podAnnotation(key: "traffic.sidecar.istio.io/excludeOutboundPorts", value: excludeOutboundPorts)
       ],
@@ -84,7 +84,7 @@ spec:
     case "superbuilder":
       podTemplate(name: podLabel,
         label: podLabel,
-        namespace: "build",
+        namespace: "jenkins",
         annotations: [
           podAnnotation(key: "traffic.sidecar.istio.io/excludeOutboundPorts", value: excludeOutboundPorts)
         ],
@@ -151,7 +151,7 @@ spec:
     case "debian":
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "build",
+      namespace: "jenkins",
       annotations: [
         podAnnotation(key: "traffic.sidecar.istio.io/excludeOutboundPorts", value: excludeOutboundPorts)
       ],
@@ -186,7 +186,7 @@ spec:
     default:
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "build",
+      namespace: "jenkins",
       annotations: [
         podAnnotation(key: "traffic.sidecar.istio.io/excludeOutboundPorts", value: excludeOutboundPorts)
       ],

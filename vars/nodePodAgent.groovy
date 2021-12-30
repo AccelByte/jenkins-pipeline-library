@@ -13,7 +13,7 @@ def call(Map args = [:], Closure body) {
     case "builder":
       podTemplate(name: podLabel,
         label: podLabel,
-        namespace: "build",
+        namespace: "jenkins",
         yaml: """
 apiVersion: v1
 kind: Pod
@@ -46,7 +46,7 @@ spec:
     case "kubectl":
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "build",
+      namespace: "jenkins",
       yaml: """
 apiVersion: v1
 kind: Pod
@@ -77,7 +77,7 @@ spec:
     case "superbuilder":
       podTemplate(name: podLabel,
         label: podLabel,
-        namespace: "build",
+        namespace: "jenkins",
         yaml: """
 apiVersion: v1
 kind: Pod
@@ -141,7 +141,7 @@ spec:
     case "debian":
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "build",
+      namespace: "jenkins",
       yaml: """
 apiVersion: v1
 kind: Pod
@@ -173,7 +173,7 @@ spec:
     default:
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "build",
+      namespace: "jenkins",
       yaml: """
 apiVersion: v1
 kind: Pod
