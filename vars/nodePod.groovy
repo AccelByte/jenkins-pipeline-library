@@ -13,7 +13,7 @@ def call(Map args = [:], Closure body) {
     case "builder":
       podTemplate(name: podLabel,
         label: podLabel,
-        namespace: "default",
+        namespace: "jenkins",
         yaml: """
 apiVersion: v1
 kind: Pod
@@ -38,7 +38,7 @@ spec:
           cpu: 2000m
           memory: 4Gi
   nodeSelector:
-    kops.k8s.io/instancegroup: nodes
+    kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
       break
 
@@ -46,7 +46,7 @@ spec:
     case "kubectl":
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "default",
+      namespace: "jenkins",
       yaml: """
 apiVersion: v1
 kind: Pod
@@ -69,7 +69,7 @@ spec:
         requests:
           cpu: 200m
   nodeSelector:
-    kops.k8s.io/instancegroup: nodes
+    kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
       break
 
@@ -77,7 +77,7 @@ spec:
     case "superbuilder":
       podTemplate(name: podLabel,
         label: podLabel,
-        namespace: "default",
+        namespace: "jenkins",
         yaml: """
 apiVersion: v1
 kind: Pod
@@ -140,7 +140,7 @@ spec:
       path: /home/jenkins/workspace/${env.JOB_NAME}
       mode: 777
   nodeSelector:
-    kops.k8s.io/instancegroup: nodes
+    kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
       break
 
@@ -148,7 +148,7 @@ spec:
     case "debian":
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "default",
+      namespace: "jenkins",
       yaml: """
 apiVersion: v1
 kind: Pod
@@ -171,7 +171,7 @@ spec:
         requests:
           cpu: 500m
   nodeSelector:
-    kops.k8s.io/instancegroup: nodes
+    kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
       break
 
@@ -180,7 +180,7 @@ spec:
     default:
     podTemplate(name: podLabel,
       label: podLabel,
-      namespace: "default",
+      namespace: "jenkins",
       yaml: """
 apiVersion: v1
 kind: Pod
@@ -203,7 +203,7 @@ spec:
         requests:
           cpu: 500m
   nodeSelector:
-    kops.k8s.io/instancegroup: nodes
+    kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
       break
   }
