@@ -36,7 +36,7 @@ spec:
           memory: 4Gi
         requests:
           cpu: 2000m
-          memory: 4Gi
+          memory: 2Gi
   nodeSelector:
     kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
@@ -127,7 +127,7 @@ spec:
           memory: 4Gi
         requests:
           cpu: 2000m
-          memory: 4Gi
+          memory: 2Gi
   volumes:
   - name: tmp
     hostPath:
