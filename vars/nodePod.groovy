@@ -145,7 +145,7 @@ spec:
       break
 
     // CASE NORMALBUILDER, MOUNT DOCKER SOCK
-    case "normalbuilder":
+    case "standardbuilder":
       podTemplate(name: podLabel,
         label: podLabel,
         namespace: "jenkins",
