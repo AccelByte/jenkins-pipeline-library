@@ -144,7 +144,7 @@ spec:
 """ ){ node(podLabel) { body() } }
       break
 
-    // CASE NORMALBUILDER, MOUNT DOCKER SOCK
+    // CASE STANDARDBUILDER, MOUNT DOCKER SOCK
     case "standardbuilder":
       podTemplate(name: podLabel,
         label: podLabel,
