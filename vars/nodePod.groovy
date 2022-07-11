@@ -176,7 +176,7 @@ spec:
         - name: tmp
           mountPath: "/tmp"
     - name: builder
-      image: accelbyte/golang-builder:1.12-alpine3.9
+      image: accelbyte/alpine:3.12
       imagePullPolicy: IfNotPresent
       volumeMounts:
         - name: dockersock
