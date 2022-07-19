@@ -197,8 +197,8 @@ spec:
           cpu: 500m
           memory: 1Gi
         requests:
-          cpu: 64m
-          memory: 64Mi
+          cpu: 200m
+          memory: 100Mi
   volumes:
   - name: tmp
     hostPath:
