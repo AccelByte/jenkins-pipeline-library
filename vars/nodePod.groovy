@@ -22,11 +22,34 @@ metadata:
     app: jenkins-slave
 spec:
   containers:
-    - name: builder
-      image: accelbyte/golang-builder:1.12-alpine3.9
-      imagePullPolicy: IfNotPresent
+    - name: jnlp
+      image: jenkins/jnlp-slave:alpine
       securityContext:
         privileged: true
+        runAsUser: 0
+        fsGroup: 0
+      tty: true
+      volumeMounts:
+        - name: dockersock
+          mountPath: "/var/run/docker.sock"
+        - name: workspace
+          mountPath: "/home/jenkins/workspace/${env.JOB_NAME}"
+        - name: tmp
+          mountPath: "/tmp"
+    - name: builder
+      image: accelbyte/alpine:3.12
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - name: dockersock
+          mountPath: "/var/run/docker.sock"
+        - name: workspace
+          mountPath: "/home/jenkins/workspace/${env.JOB_NAME}"
+        - name: tmp
+          mountPath: "/tmp"
+      securityContext:
+        privileged: true
+        runAsUser: 0
+        fsGroup: 0
       command:
       - cat
       tty: true
