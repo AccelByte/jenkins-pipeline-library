@@ -32,11 +32,11 @@ spec:
       tty: true
       resources:
         limits:
-          cpu: 2000m
-          memory: 4Gi
+          cpu: 500m
+          memory: 1Gi
         requests:
-          cpu: 2000m
-          memory: 2Gi
+          cpu: 200m
+          memory: 100Mi
   nodeSelector:
     kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
