@@ -21,6 +21,10 @@ metadata:
   labels:
     app: jenkins-slave
 spec:
+  securityContext:
+    privileged: true
+    runAsUser: 0
+    fsGroup: 0
   containers:
     - name: jnlp
       image: jenkins/jnlp-slave:alpine
@@ -37,7 +41,7 @@ spec:
         - name: tmp
           mountPath: "/tmp"
     - name: builder
-      image: accelbyte/alpine:3.12
+      image: accelbyte/golang-builder:1.12-alpine3.9
       imagePullPolicy: IfNotPresent
       volumeMounts:
         - name: dockersock
