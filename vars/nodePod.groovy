@@ -60,6 +60,17 @@ spec:
         requests:
           cpu: 200m
           memory: 100Mi
+  volumes:
+  - name: tmp
+    hostPath:
+      path: /tmp
+  - name: dockersock
+    hostPath:
+      path: /var/run/docker.sock
+  - name: workspace
+    hostPath:
+      path: /home/jenkins/workspace/${env.JOB_NAME}
+      mode: 777
   nodeSelector:
     kubernetes.io/os: linux
 """ ){ node(podLabel) { body() } }
